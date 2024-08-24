@@ -1,9 +1,13 @@
-{
-    "carro": [
-        {"nome": "x5"},
-        {"marca": "Bmw"},
-        {"tipo": "suv"},
-        {"qtAcentos": 5},
-        {"ano": 2024}
-    ]
-}
+[
+    {
+        "id": 1,
+        "nome": "x5",
+        "detalhes": {
+            "marca": "Bmw",
+            "tipo": "suv",
+            "qtAcentos": 5,
+            "ano": 2024,
+            "preco": "2.000.000"
+        }
+    }
+]
