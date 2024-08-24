@@ -1,0 +1,9 @@
+{
+    "carro": [
+        {"nome": "x5"},
+        {"marca": "Bmw"},
+        {"tipo": "suv"},
+        {"qtAcentos": 5},
+        {"ano": 2024}
+    ]
+}
