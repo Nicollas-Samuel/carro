@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carros</title>
+    <title>AutoCustom</title>
+    <link rel="icon" href="AutoCustom_logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
-    <link href="index.js">
 </head>
 <body>
     <header>
         <div>
             <div class="container">
-                <div class="logo"><img src="logo ccg.png"></div>
+                <div class="logo"><img src="AutoCustom_logo.png"></div>
                 <div class="menu">
                     <nav>
                         <a href="index.html"> Página inicial </a>
@@ -23,8 +23,10 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> 
+    <div class="button"> <input type="submit" onclick="listarCarros()" value="Listar Carros"> </div>
+    <div id="listador"></div>
 
-
+    <script src="index.js"></script>
 </body>
 </html>
