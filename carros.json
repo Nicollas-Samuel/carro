@@ -2,13 +2,11 @@
     "carro": [
         {"id": 1},
         {"nome": "x5"},
-        {"detalhes": [
-            {"marca": "Bmw"},
-            {"tipo": "suv"},
-            {"modelo": "ss"},
-            {"qtAcentos": 5},
-            {"ano": 2024},
-            {"preco": "200.000"}
-        ]}
+        {"marca": "Bmw"},
+        {"tipo": "suv"},
+        {"modelo": "ss"},
+        {"qtAcentos": 5},
+        {"ano": 2024},
+        {"preco": "200.000"}
     ]
 }

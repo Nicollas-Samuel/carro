@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-async function cadastrarCarro(){
+export async function cadastrarCarro(){
     const id = document.getElementById('id-box').value;
     const nome = document.getElementById('nome-box').value;
     const marca = document.getElementById('marca-box').value;
@@ -25,7 +25,6 @@ async function cadastrarCarro(){
     if (fs.existsSync('carros.json')) {
         carros = JSON.parse(fs.readFileSync('carros.json', 'utf8'));
     }
-
     carros.carro.push(novoCarro);
     const jsonAtualizado = JSON.stringify(carros, null, 2);
     fs.writeFileSync('carros.json', jsonAtualizado, 'utf8');
@@ -36,7 +35,7 @@ async function cadastrarCarro(){
     console.log('Novo carro adicionado com sucesso!');*/
 }
 
-function removercarro(){
+export function removercarro(){
     for(let i = 0; i < carros.carro.length; i++){
         console.log(carros.carro[i]);
     }
@@ -52,7 +51,25 @@ function removercarro(){
     }
 }
 
-function alterarcarro(){
+export function alterarCarro() {
+    let as = document.getElementById("001");
+    let id = parseInt(document.getElementById("id2-box").value, 10);
+    for (let i = 0; i < carros.carro.length; i++) {
+        as.innerHTML(carros.carro[i]);
+    }
+    let carro = carros.carro.find((carro) => carro.id === id);
+    if (carro) {
+        let novoNome = prompt('Digite o novo nome:');
+        carro.nome = novoNome;
+        const jsonAtualizado = JSON.stringify(carros, null, 2);
+        fs.writeFileSync('carros.json', jsonAtualizado, 'utf8');
+        console.log('Nome editado com sucesso!');
+    } else {
+        console.log('Carro não encontrado.');
+    }
+};
+
+/*function alterarCarro(){
     let continuar = true;
     let alea = 0;
     while(alea < 7){
@@ -71,7 +88,7 @@ function alterarcarro(){
             }
             let id = prompt('Digite o id do carro que você deseja editar:');
             let carro = carros.carro.find((carro) => carro.id === id);
-            if(pessoa) {
+            if(carro) {
                 let novoNome = prompt('Digite o novo nome:');
                 carro.nome = novoNome;
                 const jsonAtualizado = JSON.stringify(carros, null, 2);
@@ -87,7 +104,7 @@ function alterarcarro(){
             }
             let id = prompt('Digite o id do carro que você deseja editar a marca:');
             let carro = carros.carro.find((carro) => carro.id === id);
-            if(pessoa) {
+            if(carro) {
                 let novaMarca = prompt('Digite a nova marca:');
                 carro.marca = novaMarca;
                 const jsonAtualizado = JSON.stringify(index, null, 2);
@@ -103,7 +120,7 @@ function alterarcarro(){
             }
             let id = prompt('Digite o id do carro que você deseja editar o tipo: ');
             let carro = carros.carro.find((carro) => carro.id === id);
-            if(pessoa) {
+            if(caroo) {
                 let novoTipo = prompt('Digite o novo tipo: ');
                 carro.detalhes.tipo = novoTipo;
                 const jsonAtualizado = JSON.stringify(carros, null, 2);
@@ -114,60 +131,60 @@ function alterarcarro(){
             }
         }
         else if(alea == 4){
-            for(let i = 0; i < index.pessoas.length; i++){
-                console.log(index.pessoas[i]);
+            for(let i = 0; i < index.carros.length; i++){
+                console.log(index.carros[i]);
             }
             let id = prompt('Digite o id do carro que você deseja editar a quantida de acentos: ');
-            let pessoa = carros.carro.find((carro) => carro.id === id);
-            if(pessoa) {
+            let carro = carros.carro.find((carro) => carro.id === id);
+            if(carro) {
                 let novaOcupacao = prompt('Digite a nova ocupação: ');
-                pessoa.ocupacao = novaOcupacao;
+                carro.ocupacao = novaOcupacao;
                 const jsonAtualizado = JSON.stringify(index, null, 2);
                 fs.writeFileSync('index.json', jsonAtualizado, 'utf8');
                 console.log('Ocupação editada com sucesso!');
             } else {
-                console.log('Pessoa não encontrada.');
+                console.log('carro não encontrado.');
             }
         }
         else if(alea == 5){
-            for(let i = 0; i < index.pessoas.length; i++){
-                console.log(index.pessoas[i]);
+            for(let i = 0; i < index.carro.length; i++){
+                console.log(index.carro[i]);
             }
-            let id = prompt('Digite o id da pessoa que você deseja editar a ocupação: ');
+            let id = prompt('Digite o id da carro que você deseja editar a ocupação: ');
             let carro = carros.carro.find((carro) => carro.id === id);
-            if(pessoa) {
+            if(carro) {
                 let novaQuantidade = prompt('Digite a nova ocupação: ');
-                pessoa.qtAcentos = novaQuantidade;
+                carro.qtAcentos = novaQuantidade;
                 const jsonAtualizado = JSON.stringify(index, null, 2);
                 fs.writeFileSync('index.json', jsonAtualizado, 'utf8');
                 console.log('Ocupação editada com sucesso!');
             } else {
-                console.log('Pessoa não encontrada.');
+                console.log('carro não encontrado.');
             }
         }
         else if(alea == 6){
-            for(let i = 0; i < index.pessoas.length; i++){
-                console.log(index.pessoas[i]);
+            for(let i = 0; i < index.carro.length; i++){
+                console.log(index.carros[i]);
             }
-            let nom = prompt('Digite o nome da pessoa que você deseja editar a ocupação: ');
-            let pessoa = index.pessoas.find((pessoa) => pessoa.nome === nom);
-            if(pessoa) {
+            let nom = prompt('Digite o nome da carro que você deseja editar a ocupação: ');
+            let carro = index.carros.find((carro) => carro.nome === nom);
+            if(carro) {
                 let novaOcupacao = prompt('Digite a nova ocupação: ');
-                pessoa.ocupacao = novaOcupacao;
+                carro.ocupacao = novaOcupacao;
                 const jsonAtualizado = JSON.stringify(index, null, 2);
                 fs.writeFileSync('index.json', jsonAtualizado, 'utf8');
                 console.log('Ocupação editada com sucesso!');
             } else {
-                console.log('Pessoa não encontrada.');
+                console.log('carro não encontrado.');
             }
         }
         else if(alea == 7){
             continuar = false;
         }
     }
-}
+};*/
 
-async function listarCarros(){
+export async function listarCarros(){
     try {
         const response = await fetch('carros.json');
         const carros = await response.json();
@@ -180,7 +197,7 @@ async function listarCarros(){
             
             if (carro.detalhes) {
                 const detalhesInfo = document.createElement('div');
-                detalhesInfo.textContent = `Marca: ${carro.detalhes.marca}, Preço: ${carro.detalhes.preco}`;
+                detalhesInfo.textContent = `Marca: ${carro.marca}, Preço: ${carro.preco}`;
                 carroInfo.appendChild(detalhesInfo);
             }
             

@@ -112,7 +112,7 @@ form .input-single .input:valid ~ label{
     font-size: 18px;
 }
 
-.ab {
+.ab{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,4 +130,29 @@ form .input-single .input:valid ~ label{
     justify-content: left;
     align-items: center;
     height: 100vh;
+}
+
+.alteracao{
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    height: 100vh;
+    cursor: text;
+}
+
+.alteracao nav a{
+    text-decoration: none;
+    position: relative;
+    color: #000000;
+}
+
+.alter{
+    font-size: 20px;
+}
+
+.voltar{
+    display:inline-block;
+    justify-content:left;
+    align-items: center;
+    cursor: pointer;
 }
