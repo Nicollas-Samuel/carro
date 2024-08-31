@@ -1,30 +1,21 @@
 const fs = require('fs');
 
-export async function cadastrarCarro(){
-    const id = document.getElementById('id-box').value;
-    const nome = document.getElementById('nome-box').value;
-    const marca = document.getElementById('marca-box').value;
-    const tipo = document.getElementById('tipo-box').value;
-    const modelo = document.getElementById('modelo-box').value;
-    const qtAcentos = document.getElementById('qtAcentos-box').value;
-    const ano = document.getElementById('ano-box').value;
-    const preco = document.getElementById('preco-box').value;
-
+function cadastrarCarro(){
     const novoCarro = {
-        id: id,
-        nome: nome,
-        marca: marca,
-        tipo: tipo,
-        modelo: modelo,
-        qtAcentos: qtAcentos,
-        ano: ano,
-        preco: preco
+        id: document.getElementById('id-box').value,
+        nome: document.getElementById('nome-box').value,
+        marca: document.getElementById('marca-box').value,
+        tipo: document.getElementById('tipo-box').value,
+        modelo: document.getElementById('modelo-box').value,
+        qtAcentos: document.getElementById('qtAcentos-box').value,
+        ano:document.getElementById('ano-box').value,
+        preco: document.getElementById('preco-box').value
     };
 
     let carros = { carro: [] };
     if (fs.existsSync('carros.json')) {
         carros = JSON.parse(fs.readFileSync('carros.json', 'utf8'));
-    }
+    };
     carros.carro.push(novoCarro);
     const jsonAtualizado = JSON.stringify(carros, null, 2);
     fs.writeFileSync('carros.json', jsonAtualizado, 'utf8');
@@ -33,30 +24,33 @@ export async function cadastrarCarro(){
     const jsonAtualizado = JSON.stringify(carros, null, 2);
     fs.writeFileSync('carros.json', jsonAtualizado, 'utf8');
     console.log('Novo carro adicionado com sucesso!');*/
-}
+};
 
-export function removercarro(){
-    for(let i = 0; i < carros.carro.length; i++){
-        console.log(carros.carro[i]);
-    }
-    let id = prompt('Digite o id do carro que você deseja remover: ');
-    let carro = carros.carro.find((carro) => carro.id === id);
-    if(carro){
-        carros.carro.splice(carro, 1);
-        const jsonAtualizado = JSON.stringify(carros, null, 2);
-        fs.writeFileSync('carros.json', jsonAtualizado, 'utf8');
-        console.log('carro removido com sucesso!');
-    } else {
-        console.log('carro não encontrado.');
-    }
-}
+function removercarro(){
+    document.getElementById('removerCarroForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        for(let i = 0; i < carros.carro.length; i++){
+            console.log(carros.carro[i]);
+        }
+        let id = parseInt(document.getElementById("remove-box").value);
+        let car = carros.carro.find((carro) => carro.id === id);
+        if(car){
+            carros.carro.splice(car, 1);
+            const jsonAtualizado = JSON.stringify(carros, null, 2);
+            fs.writeFileSync('carros.json', jsonAtualizado, 'utf8');
+            alert.log('carro removido com sucesso!');
+        } else {
+            alert.log('carro não encontrado.');
+        };
+    });
+};
 
-export function alterarCarro() {
+function alterarCarro() {
     let as = document.getElementById("001");
     let id = parseInt(document.getElementById("id2-box").value, 10);
     for (let i = 0; i < carros.carro.length; i++) {
         as.innerHTML(carros.carro[i]);
-    }
+    };
     let carro = carros.carro.find((carro) => carro.id === id);
     if (carro) {
         let novoNome = prompt('Digite o novo nome:');
@@ -66,7 +60,7 @@ export function alterarCarro() {
         console.log('Nome editado com sucesso!');
     } else {
         console.log('Carro não encontrado.');
-    }
+    };
 };
 
 /*function alterarCarro(){
@@ -184,29 +178,44 @@ export function alterarCarro() {
     }
 };*/
 
-export async function listarCarros(){
+async function listarCarros(){
     try {
+        const response = await fetch('/carros.json');
+        const carros = await response.json();
+        const listador = document.getElementById('listador');
+        listador.innerHTML = '';
+
+        carros.carro.forEach(carro => {
+            const carroInfo = document.createElement('p');
+            carroInfo.textContent = `ID: ${carro.id}, Nome: ${carro.nome}, Marca: ${carro.marca}, Preço: ${carro.preco}`;
+            listador.appendChild(carroInfo);
+        });
+    } catch (err) {
+        console.error('Erro ao ler o arquivo carros.json', err);
+    };
+    
+    /*try {
         const response = await fetch('carros.json');
         const carros = await response.json();
         const listador = document.getElementById('listador');
         listador.innerHTML = '';
 
         carros.forEach(carro => {
-            const carroInfo = document.createElement('div');
+            const carroInfo = document.createElement('p');
             carroInfo.textContent = `ID: ${carro.id}, Nome: ${carro.nome}`;
             
-            if (carro.detalhes) {
-                const detalhesInfo = document.createElement('div');
+            if (carro) {
+                const detalhesInfo = document.createElement('p');
                 detalhesInfo.textContent = `Marca: ${carro.marca}, Preço: ${carro.preco}`;
                 carroInfo.appendChild(detalhesInfo);
-            }
+            };
             
             listador.appendChild(carroInfo);
         });
     } catch (err) {
-        console.error('Erro ao ler o arquivo carros.json', err);
-    }     
-}
+        alert.error('Erro ao ler o arquivo carros.json', err);
+    };*/
+};
     /*fetch.readFile('carros.json', 'utf8', (err, data) => {
         if (err) throw err;
         const carros = JSON.parse(data);
